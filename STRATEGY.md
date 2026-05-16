@@ -129,7 +129,33 @@ Use `POST /api/llm` to generate novel injection probes on a nightly schedule. Ro
 
 ---
 
-## 4. Telemetry
+## 4. Human Review
+
+Automated scoring catches known failure patterns — human review catches novel ones and validates that automated scores are calibrated correctly.
+
+### When to trigger human review
+
+| Trigger | Condition |
+|---|---|
+| Automated red-team probe | Bot reply contains any LEAK_SIGNAL or ENUMERATION_SIGNAL on a novel (unvalidated) injection |
+| LLM-judge degradation | Any test that fell back to keyword-only scoring because `/api/llm` was unavailable |
+| New FAIL on a previously PASS test | Regression on TC-04, TC-05, TC-12, TC-15 — all have known-good baselines |
+| Flaky test (rerun result differs) | LLM-judge tests (TC-03, TC-04, TC-07, TC-08, TC-12, TC-14) after `pytest-rerunfailures` exhausts retries |
+
+### Review process
+
+1. Reviewer reads the raw bot reply alongside the test rubric — not just the PASS/FAIL verdict.
+2. For security failures (TC-04, TC-05, TC-16): escalate immediately; do not merge the model update.
+3. For hallucination failures (TC-07, TC-08, TC-14, TC-15): log the exact reply text and date in `EVALUATION.md §4` before deciding.
+4. For novel red-team hits: add the probe string to `tests/fixtures/injections.txt` and create a corresponding automated test before closing the review.
+
+### Feedback loop
+
+Human review outcomes feed back into the harness: new signal words go into the relevant signal list (LEAK_SIGNALS, FABRICATION_WORDS, etc.), and rubrics that produced the wrong verdict are reworded and re-calibrated against a manually labelled sample.
+
+---
+
+## 5. Telemetry
 
 Wrap `send_message()` with `time.perf_counter()` and emit P95 latency to `results.log`:
 
@@ -148,7 +174,7 @@ def reply_for_timed(prompt, session_id=None):
 
 ---
 
-## 5. Scaling to 100+ Tests
+## 6. Scaling to 100+ Tests
 
 Use `pytest-xdist` for parallel execution:
 
@@ -173,7 +199,7 @@ def card_only_merchants():
 
 ---
 
-## 6. What I Would Change With More Time
+## 7. What I Would Change With More Time
 
 | Item | Description |
 |------|-------------|
@@ -188,7 +214,7 @@ def card_only_merchants():
 
 ---
 
-## 7. AI Tool Log
+## 8. AI Tool Log
 
 **Tool used:** Claude Code (`claude-sonnet-4-6`) — agentic CLI used interactively for code generation, document drafting, and iterative fixes based on manual test results.
 
@@ -196,10 +222,10 @@ def card_only_merchants():
 
 | Artefact | AI Contribution | My Contribution |
 |----------|----------------|-----------------|
-| `chatbot_client.py` | Full draft; auth bug fix (Bearer → query param) | Spotted auth was wrong (`?token=` not `Authorization:`); verified response field names against live API |
-| `tests/test_chatbot.py` | All 16 test cases, helpers, 3-layer scoring | Test category selection; rubric wording for LLM-judge; identified assertion bugs and ground-truth errors by cross-checking against manual results and screenshots |
+| `chatbot_client.py` | Full draft | Identified that the auth mechanism was wrong (`Authorization: Bearer` → `?token=` query param); verified all four API response field names against the live app |
+| `tests/test_chatbot.py` | Implemented test functions, helpers, and scoring framework in pytest once categories and prompts were defined | Decided all 16 test cases — categories, risk-first ordering, prompts, pass criteria, and rationale; designed the three-layer KW→GND→LLM scoring architecture and graceful degradation policy; discovered TC-05's unlimited transfer bypass by manually probing EUR 999,999 after the EUR 600 test passed; discovered TC-15's fabricated branch through manual exploration (not pre-planned); formed TC-16 as a follow-up hypothesis after TC-04 disclosed internal tool names; caught and corrected 13 assertion and ground-truth errors by cross-checking against live app results and screenshots |
 | `tests/conftest.py`, `evaluate.py` | Full drafts | Reviewed; no changes needed |
-| `EVALUATION.md`, `STRATEGY.md` | Structure and full drafts | Provided manual results, screenshots, corrections throughout |
+| `EVALUATION.md`, `STRATEGY.md` | Structure and full drafts | Researched and documented all ground truth from live app screens (balance, merchants, card details, branches, product pricing); provided all manual test results and screenshots; made all descoping decisions; designed CI gating policy and human review triggers |
 
 ### Key Corrections Made
 

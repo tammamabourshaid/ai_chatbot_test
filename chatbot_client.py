@@ -15,8 +15,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_URL = os.getenv("APP_URL", "https://2ndround.sandb0x.run")
-SESSION_TOKEN = os.getenv("SESSION_TOKEN", "n095-apvn-nend-rfdc-3fag-nn1stn")
+BASE_URL = os.getenv("APP_URL")
+SESSION_TOKEN = os.getenv("SESSION_TOKEN")
+
+if not BASE_URL or not SESSION_TOKEN:
+    raise RuntimeError(
+        "APP_URL and SESSION_TOKEN are required. "
+        "Copy .env.example to .env and fill in your credentials."
+    )
 
 
 def send_message(message: str, session_id: str = "test-session") -> dict:
