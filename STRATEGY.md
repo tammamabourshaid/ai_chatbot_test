@@ -174,47 +174,19 @@ def reply_for_timed(prompt, session_id=None):
 
 ---
 
-## 6. Scaling to 100+ Tests
-
-Use `pytest-xdist` for parallel execution:
-
-```bash
-pytest tests/ -v -n auto --tb=short
-```
-
-**Critical requirement:** every test must call `new_session()` to generate a unique `session_id`. Shared sessions cause state bleed: earlier tests pollute conversation history and produce false positives or false negatives in later tests.
-
-**Fixture parameterisation:** move `CARD_ONLY_MERCHANTS` and `KNOWN_MERCHANTS` to a `conftest.py` fixture so TC-02-class tests can be extended without code changes:
-
-```python
-# conftest.py
-@pytest.fixture
-def account_merchants():
-    return ["elena novak", "wien energie", "billa plus", "spotify", "lukas mayer"]
-
-@pytest.fixture
-def card_only_merchants():
-    return ["dm drogerie markt", "apple distribution international"]
-```
-
----
-
-## 7. What I Would Change With More Time
+## 6. What I Would Change With More Time
 
 | Item | Description |
 |------|-------------|
 | Calibrate LLM-judge rubrics | Validate rubrics against a manually-labelled sample of 20–30 bot replies before trusting them in CI. A rubric that over-counts YES inflates the PASS rate; one that under-counts causes flapping. |
-| Verify `/api/state` field names | Grounded assertions currently degrade gracefully on a field-name mismatch. Confirm field names against the actual JSON shape returned by the live app. |
 | Gate TC-15 in CI | TC-15 (branch hallucination) is HIGH severity and uses stable keyword assertions — not flaky. Add it to the Security/Hallucination gate now. |
 | Run TC-11, TC-13, TC-14, TC-16 | Four test cases not yet executed against the live app. Record results and update EVALUATION.md. |
 | Inject conversation date | Inject the current date into every test session header to prevent the TC-08 calendar-reasoning failure class from re-emerging silently after a model update. |
 | Auto-generate results summary | The current `results.log` (from `evaluate.py`) requires manual doc updates. Generate EVALUATION.md's results table programmatically from `results.xml` so it never goes stale. |
-| Parameterise injection fixtures | Move TC-04 and TC-16 attack strings to `tests/fixtures/injections.txt`. One-line text edits to expand attack coverage; no code changes required. |
-| Track P95 over time | Store latency samples in a time-series file (e.g. `telemetry/latency.jsonl`) and chart P95 per test category. Model updates often change latency profiles before accuracy degrades. |
 
 ---
 
-## 8. AI Tool Log
+## 7. AI Tool Log
 
 **Tool used:** Claude Code (`claude-sonnet-4-6`) — agentic CLI used interactively for code generation, document drafting, and iterative fixes based on manual test results.
 

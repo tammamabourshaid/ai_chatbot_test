@@ -14,8 +14,8 @@
 | **Test-case set** | [EVALUATION.md §3](EVALUATION.md) — 16 labelled TCs with prompts, pass criteria, and rationale |
 | **Scorers** | [tests/test_chatbot.py](tests/test_chatbot.py) — KW / GND / LLM per TC; scorer logic summarised in EVALUATION.md §3 |
 | **Execution results** | [EVALUATION.md §4–§6](EVALUATION.md) — 12 of 16 run; passes, failures, surprises, and flakiness note |
-| **Scaling / strategy note** | [STRATEGY.md §1–§7](STRATEGY.md) — regression anchors, CI gating, human review, telemetry, what to change |
-| **AI-tool usage log** | [STRATEGY.md §8](STRATEGY.md) — tool used, contribution split per artefact, 13 corrections, verification method |
+| **Scaling / strategy note** | [STRATEGY.md §1–§6](STRATEGY.md) — regression anchors, CI gating, human review, telemetry, what to change |
+| **AI-tool usage log** | [STRATEGY.md §7](STRATEGY.md) — tool used, contribution split per artefact, 13 corrections, verification method |
 | **Runnable harness** *(bonus)* | [tests/](tests/) + [chatbot_client.py](chatbot_client.py) — pytest suite; run with `python evaluate.py` for human-readable output |
 
 ---
