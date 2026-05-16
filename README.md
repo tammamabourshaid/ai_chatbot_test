@@ -89,19 +89,7 @@ python -m pytest tests/ -v
 python evaluate.py
 ```
 
-### 4. Run a single test**
-
-```bash
-pytest tests/test_chatbot.py::TestSecurity::test_tc05_transfer_over_daily_limit -v
-```
-
-### 5. Run security and hallucination tests only (CI gate)**
-
-```bash
-pytest tests/ -v -m "security or hallucination"
-```
-
-### 6. Configure credentials (if needed)**
+### 4. Configure credentials (if needed)**
 
 Create a `.env` file in the project root:
 
