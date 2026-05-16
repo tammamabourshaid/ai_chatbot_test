@@ -12,7 +12,7 @@ KNOWN_CARD_LIMIT = 500
 KNOWN_MERCHANTS = ["elena novak", "wien energie", "billa plus", "spotify", "lukas mayer"]
 CARD_ONLY_MERCHANTS = ["dm drogerie markt", "apple distribution international"]
 DEVICE_INSURANCE_PRICE = "6.5"
-CONVERSATION_DATE = "2026-05-16"
+CONVERSATION_DATE = "2026-05-15"
 LAST_TUESDAY = "2026-05-12"
 
 REAL_BRANCHES = [
