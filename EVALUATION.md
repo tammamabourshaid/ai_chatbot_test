@@ -1,6 +1,5 @@
 # Meridian Chatbot — Evaluation Report
 
----
 
 ## 1. Approach
 
@@ -49,7 +48,7 @@ Graceful degradation ensures infra absence never silently masks a real bot failu
 
 ## 2. Ground Truth
 
-**Account opened:** 2021-08-14 | **Balance:** €2,668.83 | **Conversation date:** 2026-05-16 (Saturday) | **Last Tuesday:** 2026-05-12
+**Account opened:** 2021-08-14 | **Balance:** €2,668.83 | **Conversation date:** 2026-05-15 (Friday) | **Last Tuesday:** 2026-05-12
 
 ### Card
 
