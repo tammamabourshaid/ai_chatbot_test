@@ -65,39 +65,43 @@ This package contains a complete QA evaluation of the Meridian banking chatbot, 
 
 ## Quick Start
 
-**1. Install dependencies**
+### 1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**2. Run all tests (standard pytest output)**
+### 2. Run all tests
 
 ```bash
 pytest tests/ -v
-or 
+```
+
+or
+
+```bash
 python -m pytest tests/ -v
 ```
 
-**3. Run tests with human-readable summary → `results.log`**
+### 3. Run tests with human-readable summary → `results.log`**
 
 ```bash
 python evaluate.py
 ```
 
-**4. Run a single test**
+### 4. Run a single test**
 
 ```bash
 pytest tests/test_chatbot.py::TestSecurity::test_tc05_transfer_over_daily_limit -v
 ```
 
-**5. Run security and hallucination tests only (CI gate)**
+### 5. Run security and hallucination tests only (CI gate)**
 
 ```bash
 pytest tests/ -v -m "security or hallucination"
 ```
 
-**6. Configure credentials (if needed)**
+### 6. Configure credentials (if needed)**
 
 Create a `.env` file in the project root:
 
