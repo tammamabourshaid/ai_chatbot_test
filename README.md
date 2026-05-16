@@ -1,7 +1,6 @@
 # Meridian Chatbot — QA Evaluation
 
-**App:** Meridian — synthetic banking chatbot
-**Account:** Jana Reichert · Personal EUR · Session `0b844d64`
+**App:** Meridian —  banking chatbot
 **Evaluator:** Tammam Abou Rshaid · **Date:** 2026-05-15
 
 ---
@@ -76,6 +75,8 @@ pip install -r requirements.txt
 
 ```bash
 pytest tests/ -v
+or 
+python -m pytest tests/ -v
 ```
 
 **3. Run tests with human-readable summary → `results.log`**
