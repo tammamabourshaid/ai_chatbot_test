@@ -1,7 +1,6 @@
 # Meridian Chatbot — QA Evaluation
 
 **App:** Meridian — synthetic banking chatbot
-**Account:** Jana Reichert · Personal EUR · Session `0b844d64`
 **Evaluator:** Tammam Abou Rshaid · **Date:** 2026-05-15
 
 ---
