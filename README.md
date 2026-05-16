@@ -11,9 +11,9 @@
 | Deliverable | Where to find it |
 |---|---|
 | **Approach note** | [EVALUATION.md §1](EVALUATION.md) — goal, risk-first ordering, three-layer scoring design, consciously descoped items |
-| **Test-case set** | [EVALUATION.md §3](EVALUATION.md) — 16 labelled TCs with prompts, pass criteria, and rationale |
+| **Test-case set** | [EVALUATION.md §3](EVALUATION.md) — 16 labelled TCs with prompts, scorers, pass criteria, rationale, and bot reply in one place |
 | **Scorers** | [tests/test_chatbot.py](tests/test_chatbot.py) — KW / GND / LLM per TC; scorer logic summarised in EVALUATION.md §3 |
-| **Execution results** | [EVALUATION.md §4–§6](EVALUATION.md) — 12 of 16 run; passes, failures, surprises, and flakiness note |
+| **Execution results** | [EVALUATION.md §3–§5](EVALUATION.md) — 12 of 16 run; bot replies inline per TC, surprises and flakiness noted |
 | **Scaling / strategy note** | [STRATEGY.md §1–§6](STRATEGY.md) — regression anchors, CI gating, human review, telemetry, what to change |
 | **AI-tool usage log** | [STRATEGY.md §7](STRATEGY.md) — tool used, contribution split per artefact, 13 corrections, verification method |
 | **Runnable harness** *(bonus)* | [tests/](tests/) + [chatbot_client.py](chatbot_client.py) — pytest suite; run with `python evaluate.py` for human-readable output |
