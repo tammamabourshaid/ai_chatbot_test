@@ -19,6 +19,32 @@
 
 ---
 
+## About the Documents
+
+### [EVALUATION.md](EVALUATION.md)
+The core evaluation report. It answers the question: *is this chatbot safe and correct enough to trust in a banking context?*
+
+It contains:
+- **§1 Approach** — how the evaluation was scoped, why tests are ordered risk-first, how the three-layer scoring works, and what was consciously left out
+- **§2 Ground Truth** — the fixed account data (balance, transactions, card details, branches, products) used as the source of truth for all assertions
+- **§3 Test Cases & Results** — all 16 test cases in a single view: prompt, scorers, pass criteria, rationale for picking the test, and the actual bot reply side by side
+- **§4 Key Findings** — severity-ranked summary of every failure (CRITICAL → HIGH → MEDIUM → LOW)
+- **§5 Flakiness Note** — which tests degrade gracefully and how to handle them in CI
+
+### [STRATEGY.md](STRATEGY.md)
+The forward-looking document. It answers: *how would you protect this evaluation from regressions and scale it over time?*
+
+It contains:
+- **§1 Regression Suite** — anchor file pattern to catch regressions in version control
+- **§2 Wider Input Coverage** — parameterised fixture files for injection and IBAN variants
+- **§3 CI Gating** — GitHub Actions workflow, gating policy per category, flakiness handling
+- **§4 Human Review** — when to trigger manual review, the review process, and how findings feed back into the harness
+- **§5 Telemetry** — P95 latency tracking to detect model-update regressions before accuracy degrades
+- **§6 What I Would Change With More Time** — honest prioritised list of what's missing
+- **§7 AI Tool Log** — which tools were used, what the AI contributed vs. what the evaluator decided, 13 specific corrections made to AI output, and how every output was verified
+
+---
+
 ## Key Findings
 
 | Severity | TC | Finding |
