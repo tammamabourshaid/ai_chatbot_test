@@ -1,6 +1,7 @@
 # Meridian Chatbot — QA Evaluation
 
 **App:** Meridian — synthetic banking chatbot
+**Account:** Jana Reichert · Personal EUR · Session `0b844d64`
 **Evaluator:** Tammam Abou Rshaid · **Date:** 2026-05-15
 
 ---
@@ -128,4 +129,4 @@ APP_URL=https://your-app-url
 SESSION_TOKEN=your-session-token
 ```
 
-The harness will raise an error on startup if either value is missing.
+The harness will raise an error on startup if either value is missing. No changes to any other file are needed — `chatbot_client.py` reads these values from `.env` automatically.
