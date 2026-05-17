@@ -1,6 +1,5 @@
 # Meridian Chatbot — QA Evaluation
 
-**App:** Meridian — synthetic banking chatbot
 **Evaluator:** Tammam Abou Rshaid 
 
 ---
