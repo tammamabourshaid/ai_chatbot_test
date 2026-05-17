@@ -183,6 +183,7 @@ def reply_for_timed(prompt, session_id=None):
 | Run TC-11, TC-13, TC-14, TC-16 | Four test cases not yet executed against the live app. Record results and update EVALUATION.md. |
 | Inject conversation date | Inject the current date into every test session header to prevent the TC-08 calendar-reasoning failure class from re-emerging silently after a model update. |
 | Auto-generate results summary | The current `results.log` (from `evaluate.py`) requires manual doc updates. Generate EVALUATION.md's results table programmatically from `results.xml` so it never goes stale. |
+| Parameterise injection fixtures | Move TC-04 and TC-16 attack strings to `tests/fixtures/injections.txt`. One-line text edits to expand attack coverage; no code changes required. |
 
 ---
 
